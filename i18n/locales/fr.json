@@ -1,0 +1,44 @@
+{
+    "backButtonTitle": "Retour",
+    "clocksPage": {
+        "title": "Horloges",
+        "townTitle": "Choisir une ville",
+        "townSearchPlaceholder": "Recherche",
+        "cancel": "Annuer"
+    },
+    "alarmPage": {
+        "title": "Alarme",
+        "setAlarm": "Régler l'alarme",
+        "alarmTime": "Heure de l'alarme",
+        "repeat": "Répéter",
+        "snooze": "Snooze",
+        "save": "Enregistrer",
+        "delete": "Supprimer"
+    },
+    "stopwatchPage": {
+        "title": "Chronomètre",
+        "start": "Démarrer",
+        "stop": "Arrêter",
+        "reset": "Effacer",
+        "lap": "Tour",
+        "laps": "Tours"
+    },
+    "timerPage": {
+        "title": "Minuteur",
+        "setTimer": "Régler le minuteur",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes",
+        "start": "Démarrer",
+        "stop": "Arrêter",
+        "reset": "Réinitialiser"
+    },
+    "settingsPage": {
+        "title": "Réglages",
+        "languageLabel": "Langue",
+        "themeLabel": "Thème",
+        "darkMode": "Mode sombre",
+        "lightMode": "Mode clair",
+        "systemDefault": "Par défaut du système"
+    }
+}

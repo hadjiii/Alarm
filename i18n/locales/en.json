@@ -1,0 +1,44 @@
+{
+    "backButtonTitle": "Back",
+    "clocksPage": {
+        "title": "Clocks",
+        "townTitle": "Select a town",
+        "townSearchPlaceholder": "Search",
+        "cancel": "Cancel"
+    },
+    "alarmPage": {
+        "title": "Alarm",
+        "setAlarm": "Set alarm",
+        "alarmTime": "Alarm time",
+        "repeat": "Repeat",
+        "snooze": "Snooze",
+        "save": "Save",
+        "delete": "Delete"
+    },
+    "stopwatchPage": {
+        "title": "Stopwatch",
+        "start": "Start",
+        "stop": "Stop",
+        "reset": "Reset",
+        "lap": "Lap",
+        "laps": "Laps"
+    },
+    "timerPage": {
+        "title": "Timer",
+        "setTimer": "Set timer",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds",
+        "start": "Start",
+        "stop": "Stop",
+        "reset": "Reset"
+    },
+    "settingsPage": {
+        "title": "Settings",
+        "languageLabel": "Language",
+        "themeLabel": "Theme",
+        "darkMode": "Dark mode",
+        "lightMode": "Light mode",
+        "systemDefault": "System default"
+    }
+}
