@@ -34,8 +34,6 @@ export default function TownScreen() {
 		setError(null);
 		setIsLoading(true);
 
-		const timezones = useStore.getState().timezones;
-
 		if (timezones) {
 			setIsLoading(false);
 			return;
