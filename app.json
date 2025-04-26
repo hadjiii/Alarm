@@ -31,8 +31,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "locales": {
-      "en": "./locales/en.json",
-      "fr": "./locales/fr.json"
+      "en": "./i18n/locales/en.json",
+      "fr": "./i18n/locales/fr.json"
     },
     "plugins": [
       "expo-router",
