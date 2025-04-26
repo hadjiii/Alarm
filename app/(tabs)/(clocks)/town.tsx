@@ -13,15 +13,17 @@ export default function TownScreen() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<any>(null);
 	const [filter, setFilter] = useState('');
-	const [items, setItems] = useState<string[]>([]);
 	const [filtered, setFiltered] = useState<string[]>([]);
 	const empty = filter && filter !== '' && filtered.length === 0;
 
+	const setTimezones = useStore((state) => state.setTimezones);
 	const addName = useStore((state) => state.addName);
+
+	const timezones = useStore((state) => state.timezones);
 
 	useEffect(() => {
 		if (filter && filter !== '') {
-			const filtered = items.filter((town) => town.includes(filter));
+			const filtered = timezones?.filter((town) => town.includes(filter)) ?? [];
 			setFiltered(filtered);
 		} else {
 			setFiltered([]);
@@ -31,13 +33,21 @@ export default function TownScreen() {
 	useEffect(() => {
 		setError(null);
 		setIsLoading(true);
+
+		const timezones = useStore.getState().timezones;
+
+		if (timezones) {
+			setIsLoading(false);
+			return;
+		}
+
 		fetch('https://www.timeapi.io/api/timezone/availabletimezones')
 			.then(async (res) => {
 				if (!res.ok) {
 					throw new Error('An error occurred');
 				}
 
-				setItems(await res.json());
+				setTimezones(await res.json());
 			})
 			.catch((err) => setError(err))
 			.finally(() => setIsLoading(false));
@@ -102,7 +112,7 @@ export default function TownScreen() {
 				</ThemedView>
 			) : (
 				<ScrollView horizontal={false} style={styles.list}>
-					{items.map((town, index) => (
+					{timezones?.map((town, index) => (
 						<TownItem
 							name={town.replace('/', ' ')}
 							key={index}

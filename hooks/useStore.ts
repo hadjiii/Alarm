@@ -7,6 +7,7 @@ type State = {
 	names: string[];
 	alarms: Alarm[];
 	language: 'fr' | 'en';
+	timezones?: string[] | null;
 };
 
 type Action = {
@@ -17,6 +18,7 @@ type Action = {
 	updateAlarm: (alarm: Alarm) => void;
 	removeAlarm: (id: string) => void;
 	setLanguage: (language: 'fr' | 'en') => void;
+	setTimezones: (timezones: string[]) => void;
 };
 
 export const useStore = create<State & Action>((set) => ({
@@ -24,6 +26,7 @@ export const useStore = create<State & Action>((set) => ({
 	names: ['Europe/Paris'],
 	language: 'fr',
 	alarms: [],
+	timezones: null,
 	addClock: (clocks: Town[]) => set((state) => ({ clocks: [...clocks] })),
 	removeClock: (name: string) =>
 		set((state) => ({
@@ -50,4 +53,5 @@ export const useStore = create<State & Action>((set) => ({
 			alarms: state.alarms.filter((alarm) => alarm.id !== id),
 		})),
 	setLanguage: (language: 'fr' | 'en') => set(() => ({ language })),
+	setTimezones: (timezones: string[]) => set(() => ({ timezones })),
 }));
