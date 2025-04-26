@@ -2,13 +2,7 @@ import Section from '@/components/Section';
 import SectionItem from '@/components/SetionItem';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import {
-	Pressable,
-	Switch,
-	TouchableHighlight,
-	TouchableOpacity,
-	useColorScheme,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import I18n from '@/i18n';
@@ -25,28 +19,15 @@ export default function Settings() {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<ThemedView style={{ flex: 1 }}>
+			<ThemedView style={styles.container}>
 				<ThemedText type="title">{I18n.t('settingsPage.title')}</ThemedText>
 
 				<Section>
 					<SectionItem>
-						<ThemedView
-							style={{
-								width: '100%',
-								flexDirection: 'row',
-								alignItems: 'center',
-								justifyContent: 'space-between',
-							}}
-						>
+						<ThemedView style={styles.item}>
 							<ThemedText>{I18n.t('settingsPage.themeLabel')}</ThemedText>
 
-							<ThemedView
-								style={{
-									flexDirection: 'row',
-									alignItems: 'center',
-									gap: 16,
-								}}
-							>
+							<ThemedView style={styles.actions}>
 								<TouchableOpacity onPress={() => switchLanguage('fr')}>
 									<ThemedText>Dark</ThemedText>
 								</TouchableOpacity>
@@ -62,22 +43,9 @@ export default function Settings() {
 				</Section>
 				<Section>
 					<SectionItem>
-						<ThemedView
-							style={{
-								width: '100%',
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-							}}
-						>
+						<ThemedView style={styles.item}>
 							<ThemedText>{I18n.t('settingsPage.languageLabel')}</ThemedText>
-							<ThemedView
-								style={{
-									flexDirection: 'row',
-									alignItems: 'center',
-									gap: 16,
-								}}
-							>
+							<ThemedView style={styles.actions}>
 								<TouchableOpacity onPress={() => switchLanguage('fr')}>
 									<ThemedText>Français</ThemedText>
 								</TouchableOpacity>
@@ -92,3 +60,20 @@ export default function Settings() {
 		</SafeAreaView>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	item: {
+		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	actions: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 16,
+	},
+});

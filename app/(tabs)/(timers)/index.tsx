@@ -7,20 +7,10 @@ import { Alarm } from '@/types/Alarm';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { Link, Stack, useNavigation } from 'expo-router';
 import { useState } from 'react';
-import {
-	Pressable,
-	Switch,
-	Text,
-	TextInput,
-	TouchableHighlight,
-	TouchableOpacity,
-} from 'react-native';
+import { Pressable, StyleSheet, TextInput } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import CircleButton from '@/components/CircleButton';
-import {
-	SafeAreaView,
-	useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SetupAlarmScreen() {
 	const safeAreaInsets = useSafeAreaInsets();
@@ -44,24 +34,12 @@ export default function SetupAlarmScreen() {
 				options={{
 					header: () => (
 						<ThemedView
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-								padding: 16,
-								marginTop: safeAreaInsets.top,
-							}}
+							style={[styles.header, { marginTop: safeAreaInsets.top }]}
 						>
 							<Link dismissTo href="../">
-								<ThemedText
-									style={{ color: 'orange', fontSize: 17, fontWeight: 400 }}
-								>
-									Annuler
-								</ThemedText>
+								<ThemedText style={styles.headerBtn}>Annuler</ThemedText>
 							</Link>
-							<ThemedText style={{ fontSize: 18, fontWeight: 500 }}>
-								Alarme
-							</ThemedText>
+							<ThemedText style={styles.title}>Alarme</ThemedText>
 							<Pressable
 								onPress={() => {
 									addAlarm(alarm);
@@ -81,17 +59,13 @@ export default function SetupAlarmScreen() {
 									navigation.goBack();
 								}}
 							>
-								<ThemedText
-									style={{ color: 'orange', fontSize: 17, fontWeight: 400 }}
-								>
-									Enregistrer
-								</ThemedText>
+								<ThemedText style={styles.headerBtn}>Enregistrer</ThemedText>
 							</Pressable>
 						</ThemedView>
 					),
 				}}
 			/>
-			<ThemedView style={{ flex: 1, padding: 16, gap: 32 }}>
+			<ThemedView style={styles.timePickerContainer}>
 				<RNDateTimePicker
 					mode="time"
 					display="spinner"
@@ -108,14 +82,7 @@ export default function SetupAlarmScreen() {
 						}
 					}}
 				/>
-				<ThemedView
-					style={{
-						width: '100%',
-						padding: 10,
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-					}}
-				>
+				<ThemedView style={styles.btnsContainer}>
 					<CircleButton
 						title="Annuler"
 						onPress={() => {
@@ -133,14 +100,7 @@ export default function SetupAlarmScreen() {
 
 				<Section>
 					<SectionItem displaySeperator={true}>
-						<ThemedView
-							style={{
-								width: '100%',
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								backgroundColor: 'transparent',
-							}}
-						>
+						<ThemedView style={styles.description}>
 							<ThemedText style={{ backgroundColor: 'transparent' }}>
 								Description
 							</ThemedText>
@@ -157,14 +117,7 @@ export default function SetupAlarmScreen() {
 					</SectionItem>
 					<SectionItem canNavigate={true}>
 						<Link href="./ringtone">
-							<ThemedView
-								style={{
-									width: '100%',
-									flexDirection: 'row',
-									justifyContent: 'space-between',
-									backgroundColor: 'transparent',
-								}}
-							>
+							<ThemedView style={styles.ringtone}>
 								<ThemedText>Sonnerie</ThemedText>
 								<ThemedText>Alarme</ThemedText>
 							</ThemedView>
@@ -175,3 +128,33 @@ export default function SetupAlarmScreen() {
 		</>
 	);
 }
+
+const styles = StyleSheet.create({
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: 16,
+	},
+	headerBtn: { color: 'orange', fontSize: 17, fontWeight: 400 },
+	title: { fontSize: 18, fontWeight: 500 },
+	timePickerContainer: { flex: 1, padding: 16, gap: 32 },
+	btnsContainer: {
+		width: '100%',
+		padding: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	description: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: 'transparent',
+	},
+	ringtone: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: 'transparent',
+	},
+});

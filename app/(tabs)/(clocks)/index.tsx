@@ -1,10 +1,4 @@
-import {
-	Image,
-	StyleSheet,
-	Platform,
-	ScrollView,
-	Pressable,
-} from 'react-native';
+import { StyleSheet, ScrollView, Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -59,15 +53,7 @@ export default function HomeScreen() {
 		<SafeAreaView style={{ flex: 1 }}>
 			<GestureHandlerRootView style={{ flex: 1 }}>
 				<ThemedView style={styles.container}>
-					<ThemedView
-						style={{
-							flexDirection: 'row',
-							paddingHorizontal: 16,
-							height: 45,
-							justifyContent: 'space-between',
-							alignItems: 'center',
-						}}
-					>
+					<ThemedView style={styles.header}>
 						<Pressable>
 							<ThemedText style={{ color: 'orange' }}>Modifier</ThemedText>
 						</Pressable>
@@ -77,15 +63,15 @@ export default function HomeScreen() {
 					</ThemedView>
 
 					<ScrollView
-						contentInset={{ top: 16, bottom: 64 }}
+						contentInset={styles.listContentInset}
 						showsVerticalScrollIndicator={false}
-						style={{ flex: 1, paddingLeft: 16 }}
+						style={styles.list}
 					>
-						<ThemedText type="title" style={{ marginBottom: 16 }}>
+						<ThemedText type="title" style={styles.title}>
 							{I18n.t('clocksPage.title')}
 						</ThemedText>
 
-						{towns.map((town, index) => (
+						{towns.map((town) => (
 							<HorlogeItem
 								{...town}
 								key={town.name}
@@ -103,4 +89,17 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
+	header: {
+		flexDirection: 'row',
+		paddingHorizontal: 16,
+		height: 45,
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	listContentInset: {
+		top: 16,
+		bottom: 64,
+	},
+	list: { flex: 1, paddingLeft: 16 },
+	title: { marginBottom: 16 },
 });

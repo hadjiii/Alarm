@@ -3,16 +3,9 @@ import { ThemedView } from '@/components/ThemedView';
 import TownItem from '@/components/TownItem';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useStore } from '@/hooks/useStore';
-import { Town } from '@/types/Town';
 import { Link, useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
-import {
-	KeyboardAvoidingView,
-	Pressable,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-} from 'react-native';
+import { Pressable, ScrollView, StyleSheet, TextInput } from 'react-native';
 
 export default function TownScreen() {
 	const navigation = useNavigation();
@@ -67,24 +60,11 @@ export default function TownScreen() {
 	}
 
 	return (
-		<ThemedView style={{ flex: 1 }}>
-			<ThemedView style={{ gap: 16, padding: 16 }}>
-				<ThemedText style={{ fontSize: 12, textAlign: 'center' }}>
-					Choisir une ville
-				</ThemedText>
-				<ThemedView
-					style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
-				>
-					<ThemedView
-						style={{
-							flex: 1,
-							flexDirection: 'row',
-							gap: 4,
-							padding: 8,
-							backgroundColor: 'grey',
-							borderRadius: 10,
-						}}
-					>
+		<ThemedView style={styles.container}>
+			<ThemedView style={styles.header}>
+				<ThemedText style={styles.headerTitle}>Choisir une ville</ThemedText>
+				<ThemedView style={styles.searchBar}>
+					<ThemedView style={styles.searchBarContainer}>
 						<IconSymbol name="magnifyingglass" size={20} color="lightgrey" />
 						<TextInput
 							placeholder="Recherche"
@@ -115,16 +95,13 @@ export default function TownScreen() {
 
 			{/* <KeyboardAvoidingView> */}
 			{empty ? (
-				<ThemedView style={{ flex: 1, justifyContent: 'center' }}>
-					<ThemedText style={{ alignSelf: 'center' }}>
+				<ThemedView style={styles.emptyContainer}>
+					<ThemedText style={styles.emptyText}>
 						Aucun résultat trouvé
 					</ThemedText>
 				</ThemedView>
 			) : (
-				<ScrollView
-					horizontal={false}
-					style={{ flex: 1, paddingHorizontal: 16 }}
-				>
+				<ScrollView horizontal={false} style={styles.list}>
 					{items.map((town, index) => (
 						<TownItem
 							name={town.replace('/', ' ')}
@@ -142,3 +119,21 @@ export default function TownScreen() {
 		</ThemedView>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: { flex: 1 },
+	header: { gap: 16, padding: 16 },
+	headerTitle: { fontSize: 12, textAlign: 'center' },
+	searchBar: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+	searchBarContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		gap: 4,
+		padding: 8,
+		backgroundColor: 'grey',
+		borderRadius: 10,
+	},
+	emptyContainer: { flex: 1, justifyContent: 'center' },
+	emptyText: { alignSelf: 'center' },
+	list: { flex: 1, paddingHorizontal: 16 },
+});

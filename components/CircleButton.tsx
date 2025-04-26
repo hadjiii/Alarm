@@ -1,4 +1,4 @@
-import { ColorValue, Text, TouchableOpacity } from 'react-native';
+import { ColorValue, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { ThemedView } from './ThemedView';
 
 export default function CircleButton({
@@ -12,18 +12,30 @@ export default function CircleButton({
 }) {
 	return (
 		<ThemedView
-			style={{
-				width: 80,
-				height: 80,
-				borderRadius: 40,
-				backgroundColor: backgroundColor ?? 'grey',
-				alignItems: 'center',
-				justifyContent: 'center',
-			}}
+			style={[
+				styles.container,
+				{
+					backgroundColor: backgroundColor ?? styles.container.backgroundColor,
+				},
+			]}
 		>
 			<TouchableOpacity onPress={onPress}>
-				<Text style={{ color: 'white' }}>{title}</Text>
+				<Text style={styles.title}>{title}</Text>
 			</TouchableOpacity>
 		</ThemedView>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		width: 80,
+		height: 80,
+		borderRadius: 40,
+		backgroundColor: 'grey',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	title: {
+		color: 'white',
+	},
+});

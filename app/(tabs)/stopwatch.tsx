@@ -66,26 +66,9 @@ export default function Stopwatch() {
 	};
 
 	return (
-		<ThemedView style={{ flex: 1, alignItems: 'center' }}>
-			<ThemedText
-				style={{
-					marginTop: 200,
-					marginBottom: 100,
-					fontSize: 80,
-					fontWeight: '200',
-					lineHeight: 80,
-				}}
-			>
-				{totalTime}
-			</ThemedText>
-			<ThemedView
-				style={{
-					width: '100%',
-					padding: 10,
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-				}}
-			>
+		<ThemedView style={styles.container}>
+			<ThemedText style={styles.totalTime}>{totalTime}</ThemedText>
+			<ThemedView style={styles.btnsContainer}>
 				<CircleButton
 					title={canReset ? 'Effacer' : 'Tour'}
 					onPress={canReset ? handleReset : startNewLap}
@@ -97,36 +80,51 @@ export default function Stopwatch() {
 				/>
 			</ThemedView>
 			<FlatList
-				style={{ flex: 1, width: '100%' }}
-				contentContainerStyle={{
-					marginHorizontal: 8,
-					paddingBottom: 32,
-				}}
+				style={styles.list}
+				contentContainerStyle={styles.listContentContainer}
 				data={laps}
 				keyExtractor={(item) => item.id}
 				renderItem={({ item }) => (
-					<ThemedView
-						style={{
-							width: '100%',
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							padding: 10,
-						}}
-					>
+					<ThemedView style={styles.item}>
 						<ThemedText>{item.name}</ThemedText>
 						<ThemedText>{item.time}</ThemedText>
 					</ThemedView>
 				)}
-				ItemSeparatorComponent={() => (
-					<ThemedView
-						style={{
-							height: StyleSheet.hairlineWidth,
-							width: '100%',
-							backgroundColor: '#dadde1',
-						}}
-					/>
-				)}
+				ItemSeparatorComponent={() => <ThemedView style={styles.separator} />}
 			/>
 		</ThemedView>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: { flex: 1, alignItems: 'center' },
+	totalTime: {
+		marginTop: 200,
+		marginBottom: 100,
+		fontSize: 80,
+		fontWeight: '200',
+		lineHeight: 80,
+	},
+	btnsContainer: {
+		width: '100%',
+		padding: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	list: { flex: 1, width: '100%' },
+	listContentContainer: {
+		marginHorizontal: 8,
+		paddingBottom: 32,
+	},
+	item: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		padding: 10,
+	},
+	separator: {
+		height: StyleSheet.hairlineWidth,
+		width: '100%',
+		backgroundColor: '#dadde1',
+	},
+});

@@ -12,13 +12,7 @@ export default function AlarmsScreen() {
 	const updateAlarm = useStore((state) => state.updateAlarm);
 
 	return (
-		<ScrollView
-			contentContainerStyle={{
-				flex: 1,
-				paddingVertical: 16,
-				paddingHorizontal: 8,
-			}}
-		>
+		<ScrollView contentContainerStyle={styles.listContentContainer}>
 			<ThemedText type="title" style={{ marginBottom: 16 }}>
 				Alarmes
 			</ThemedText>
@@ -41,44 +35,25 @@ export default function AlarmsScreen() {
 				</ThemedText>
 			</ThemedView>
 			<ThemedView
-				style={{
-					marginTop: 4,
-					height: StyleSheet.hairlineWidth,
-					backgroundColor: 'grey',
-				}}
+				style={[
+					styles.separator,
+					{
+						marginTop: 4,
+					},
+				]}
 			/>
 
-			<ThemedView
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					paddingVertical: 16,
-				}}
-			>
+			<ThemedView style={styles.noAlarm}>
 				<ThemedText>Aucune alarme</ThemedText>
-				<Pressable
-					style={{
-						backgroundColor: 'grey',
-						borderRadius: 20,
-						paddingHorizontal: 8,
-						paddingVertical: 4,
-					}}
-				>
-					<ThemedText style={{ fontSize: 16, color: 'orange' }}>
-						CONFIGURER
-					</ThemedText>
+				<Pressable style={styles.setupBtn}>
+					<ThemedText style={styles.setupText}>CONFIGURER</ThemedText>
 				</Pressable>
 			</ThemedView>
-			<ThemedView
-				style={{ height: StyleSheet.hairlineWidth, backgroundColor: 'grey' }}
-			/>
+			<ThemedView style={styles.separator} />
 
 			{alarms.length > 0 && (
-				<ThemedView style={{ marginTop: 32, backgroundColor: 'transparent' }}>
-					<ThemedText style={{ fontSize: 18, fontWeight: '600' }}>
-						Autres
-					</ThemedText>
+				<ThemedView style={styles.alarms}>
+					<ThemedText style={styles.othersText}>Autres</ThemedText>
 
 					<ThemedView
 						style={{
@@ -103,3 +78,31 @@ export default function AlarmsScreen() {
 		</ScrollView>
 	);
 }
+
+const styles = StyleSheet.create({
+	listContentContainer: {
+		flex: 1,
+		paddingVertical: 16,
+		paddingHorizontal: 8,
+	},
+	separator: {
+		height: StyleSheet.hairlineWidth,
+		backgroundColor: 'grey',
+	},
+	noAlarm: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingVertical: 16,
+	},
+	alarms: { marginTop: 32, backgroundColor: 'transparent' },
+	setupBtn: {
+		backgroundColor: 'grey',
+		borderRadius: 20,
+		paddingHorizontal: 8,
+		paddingVertical: 4,
+	},
+	setupText: { fontSize: 16, color: 'orange' },
+
+	othersText: { marginTop: 32, backgroundColor: 'transparent' },
+});

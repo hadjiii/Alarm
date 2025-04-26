@@ -10,33 +10,33 @@ export default function SectionItem({
 }: PropsWithChildren & { canNavigate?: boolean; displaySeperator?: boolean }) {
 	return (
 		<>
-			<ThemedView
-				style={{
-					flexDirection: 'row',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					paddingVertical: 8,
-					paddingEnd: 24,
-					backgroundColor: 'transparent',
-				}}
-			>
-				<ThemedView style={{ backgroundColor: 'transparent' }}>
-					{children}
-				</ThemedView>
+			<ThemedView style={styles.container}>
+				<ThemedView style={styles.item}>{children}</ThemedView>
 				{canNavigate && (
 					<IconSymbol name="chevron.forward" size={20} color="white" />
 				)}
 			</ThemedView>
 
-			{displaySeperator && (
-				<ThemedView
-					style={{
-						height: StyleSheet.hairlineWidth,
-						width: '100%',
-						backgroundColor: '#dadde1',
-					}}
-				/>
-			)}
+			{displaySeperator && <ThemedView style={styles.separator} />}
 		</>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingVertical: 8,
+		paddingEnd: 24,
+		backgroundColor: 'transparent',
+	},
+	item: {
+		backgroundColor: 'transparent',
+	},
+	separator: {
+		height: StyleSheet.hairlineWidth,
+		width: '100%',
+		backgroundColor: '#dadde1',
+	},
+});
